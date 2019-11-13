@@ -1,0 +1,73 @@
+{
+  "name": "LoAgentApp",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "precommit": "lint-staged",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "android-release": "react-native run-android --variant=release",
+    "test": "jest",
+    "lint": "eslint .",
+    "lint:write": "eslint --debug src/ --fix",
+    "prettier": "prettier --write 'src/**/*.{ts,js,css,html}'"
+  },
+  "dependencies": {
+    "@react-native-community/async-storage": "^1.6.1",
+    "@react-native-community/netinfo": "^4.6.0",
+    "axios": "^0.19.0",
+    "date-fns": "^2.2.1",
+    "formik": "^1.5.8",
+    "query-string": "^6.8.3",
+    "react": "16.9.0",
+    "react-native": "0.61.4",
+    "react-native-config": "^0.11.7",
+    "react-native-gesture-handler": "^1.5.0",
+    "react-native-modal": "^11.3.1",
+    "react-native-reanimated": "^1.2.0",
+    "react-native-restart": "^0.0.13",
+    "react-native-safe-area-view": "^0.14.8",
+    "react-native-splash-screen": "^3.2.0",
+    "react-native-svg": "^9.9.3",
+    "react-native-table-component": "^1.2.1",
+    "react-native-webview": "^7.0.5",
+    "react-navigation": "^4.0.5",
+    "react-navigation-animated-switch": "^0.3.1",
+    "react-navigation-drawer": "^2.2.1",
+    "react-navigation-redux-helpers": "^4.0.0",
+    "react-navigation-stack": "^1.7.3",
+    "react-redux": "^7.1.1",
+    "redux": "^4.0.4",
+    "redux-persist": "^6.0.0",
+    "redux-persist-filesystem-storage": "^2.0.0",
+    "redux-persist-transform-expire": "^0.0.2",
+    "redux-saga": "^1.0.5",
+    "rn-fetch-blob": "^0.11.2",
+    "shortid": "^2.2.15",
+    "yup": "^0.27.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/runtime": "^7.6.2",
+    "@react-native-community/eslint-config": "^0.0.5",
+    "babel-jest": "^24.9.0",
+    "eslint": "^6.5.1",
+    "husky": "^3.0.5",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.2.5",
+    "metro-react-native-babel-preset": "^0.56.0",
+    "react-native-svg-transformer": "^0.13.0",
+    "react-test-renderer": "16.9.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  }
+}
