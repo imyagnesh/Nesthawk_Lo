@@ -2,12 +2,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import SafeAreaView from 'react-native-safe-area-view';
-import {View, Image, FlatList} from 'react-native';
+import {View, FlatList} from 'react-native';
 import Text from '../text/Text';
 import {RectButton} from 'react-native-gesture-handler';
-import {openLink} from '../../utils';
-
+import {action} from '../../utils';
+import * as types from '../../constants/actionTypes';
 import styles from './styles';
+import FastImage from 'react-native-fast-image';
 // import axios from 'axios';
 
 const listData = [
@@ -33,15 +34,17 @@ const listData = [
   },
 ];
 
-const CustomDrawer = ({navigation: {navigate, closeDrawer}, logout}) => {
-  const profileIcon = '../../assets/images/icon.jpeg';
+const CustomDrawer = ({login, navigation: {navigate, closeDrawer}, logout}) => {
+  const {PROFILE_IMG, NAME, ENROLLMENT_ID} = login;
+  // const profileIcon = '../../assets/images/icon.jpeg';
   const renderProfileImage = () => {
     return (
       <View style={styles.profileContainer}>
         <View style={styles.profileTextContainer}>
-          <Image
-            style={[styles.profileImage, {resizeMode: 'contain'}]}
-            source={require(profileIcon)}
+          <FastImage
+            style={[styles.profileImage]}
+            source={{uri: PROFILE_IMG, priority: FastImage.priority.high}}
+            resizeMode={FastImage.resizeMode.contain}
           />
           <Text
             variant="subtitle2"
@@ -50,7 +53,7 @@ const CustomDrawer = ({navigation: {navigate, closeDrawer}, logout}) => {
               fontSize: 16,
               color: '#fff',
             }}>
-            {'Scott Edwards'}
+            {NAME}
           </Text>
         </View>
       </View>
@@ -62,7 +65,9 @@ const CustomDrawer = ({navigation: {navigate, closeDrawer}, logout}) => {
   const keyExtractor = (item, index) => `${item}-${index}`;
   const redirectToDetails = items => {
     if (items.screenToNavigate === 'RequestAgent') {
-      openLink('https://www.agentfind.com/refer/');
+      navigate(items.screenToNavigate, {
+        uri: `https://afnew-agentfind.cs97.force.com/AgentFind/AFRequestAgent?id=${ENROLLMENT_ID}`,
+      });
     } else {
       navigate(items.screenToNavigate);
     }
@@ -135,13 +140,15 @@ const CustomDrawer = ({navigation: {navigate, closeDrawer}, logout}) => {
   );
 };
 
-// const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  login: state.login,
+});
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch({type: 'LOGOUT'}),
+  logout: () => dispatch(action(`${types.LOGOUT}`)),
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(CustomDrawer);

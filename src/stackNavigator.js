@@ -7,7 +7,7 @@ import BuyerStages from './screens/buyerStages/BuyerStages';
 import Dashboard from './screens/dashboard/Dashboard';
 import Deals from './screens/deals/Deals';
 import Profile from './screens/profile/Profile';
-
+import RequestAgent from './screens/requestAgent/RequestAgent';
 import {createStackNavigator} from 'react-navigation-stack';
 import {BorderlessButton} from 'react-native-gesture-handler';
 
@@ -18,6 +18,12 @@ const headerNavigationOption = ({navigation}) => {
   let title = routeName;
   if (routeName === 'BuyerStages') {
     title = 'Buyer Stages';
+  }
+  if (routeName === 'RequestAgent') {
+    title = 'Request Agent';
+  }
+  if (routeName === 'DealDetail') {
+    title = 'Deal Detail';
   }
   return {
     title,
@@ -65,6 +71,13 @@ export const buyerStagesStackNavigator = createStackNavigator({
 export const profileStackNavigator = createStackNavigator({
   Profile: {
     screen: Profile,
+    navigationOptions: headerNavigationOption,
+  },
+});
+
+export const requestAgentStackNavigator = createStackNavigator({
+  RequestAgent: {
+    screen: RequestAgent,
     navigationOptions: headerNavigationOption,
   },
 });

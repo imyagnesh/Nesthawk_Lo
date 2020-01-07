@@ -6,12 +6,15 @@ import {createDrawerNavigator} from 'react-navigation-drawer';
 import {createStackNavigator} from 'react-navigation-stack';
 import CustomDrawer from './components/customDrawer/CustomDrawer';
 import Profile from './screens/profile/Profile';
+import Alerts from './screens/alerts/Alerts';
+import DealDetail from './screens/dealDetail/DealDetail';
+import ChatMsg from './screens/chatMsg/ChatMsg';
 
 import {
   dashboardStackNavigator,
   dealsStackNavigator,
   buyerStagesStackNavigator,
-  profileStackNavigator,
+  requestAgentStackNavigator,
 } from './stackNavigator';
 
 const modalNavigationOption = ({navigation}) => {
@@ -23,6 +26,18 @@ const modalNavigationOption = ({navigation}) => {
   }
   if (routeName === 'Profile') {
     title = 'Profile';
+  }
+  if (routeName === 'RequestAgent') {
+    title = 'Request Agent';
+  }
+  if (routeName === 'Alerts') {
+    title = 'Alerts';
+  }
+  if (routeName === 'DealDetail') {
+    title = 'Deal Detail';
+  }
+  if (routeName === 'ChatMsg') {
+    title = 'Chatter';
   }
   return {
     header: undefined,
@@ -42,6 +57,38 @@ const rootStackNavigator = createStackNavigator(
       screen: Profile,
       navigationOptions: modalNavigationOption,
     },
+    Alerts: {
+      screen: Alerts,
+      navigationOptions: modalNavigationOption,
+    },
+    DealDetail: {
+      screen: DealDetail,
+      navigationOptions: modalNavigationOption,
+    },
+  },
+  {
+    defaultNavigationOptions: {
+      header: null,
+    },
+    mode: 'modal',
+  },
+);
+
+const rootDealsStackNavigator = createStackNavigator(
+  {
+    Deals: dealsStackNavigator,
+    DealDetail: {
+      screen: DealDetail,
+      navigationOptions: modalNavigationOption,
+    },
+    ChatMsg: {
+      screen: ChatMsg,
+      navigationOptions: modalNavigationOption,
+    },
+    Profile: {
+      screen: Profile,
+      navigationOptions: modalNavigationOption,
+    },
   },
   {
     defaultNavigationOptions: {
@@ -54,8 +101,9 @@ const rootStackNavigator = createStackNavigator(
 export const AppDrawerNavigator = createDrawerNavigator(
   {
     DashBoard: rootStackNavigator,
-    Deals: dealsStackNavigator,
+    Deals: rootDealsStackNavigator,
     BuyerStages: buyerStagesStackNavigator,
+    RequestAgent: requestAgentStackNavigator,
   },
   {
     contentComponent: CustomDrawer,
@@ -66,11 +114,11 @@ export const AppDrawerNavigator = createDrawerNavigator(
 
 export const Main = createSwitchNavigator(
   {
-    // Login: Login,
+    Login: Login,
     App: AppDrawerNavigator,
   },
   {
-    initialRouteName: 'App',
+    initialRouteName: 'Login',
   },
 );
 

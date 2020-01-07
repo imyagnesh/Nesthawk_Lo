@@ -14,9 +14,15 @@ const App = () => {
 
   useEffect(() => {
     SplashScreen.hide();
-
     const handleChange = () => {
-      setLoggedIn(true);
+      const currentValue = store.getState().login.USERNAME;
+      if (currentValue !== loggedIn) {
+        if (currentValue) {
+          setLoggedIn(currentValue);
+        } else {
+          setLoggedIn(false);
+        }
+      }
     };
     store.subscribe(handleChange);
   }, [loggedIn]);

@@ -1,37 +1,16 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {memo} from 'react';
-import {View, FlatList, ScrollView} from 'react-native';
+import {View, FlatList} from 'react-native';
+import {connect} from 'react-redux';
+import * as types from '../../constants/actionTypes';
 import Button from '../../components/button/Button';
+import Loading from '../../components/loading/Loading';
 import CircleWithText from '../../components/circle/CircleWithText';
 
-const listData = [
-  {
-    title: 'Activity Looking',
-    value: 0,
-  },
-  {
-    title: 'Offer Out',
-    value: 0,
-  },
-  {
-    title: 'Under Contract',
-    value: 0,
-  },
-  {
-    title: 'Closed',
-    value: 0,
-  },
-  {
-    title: 'On Hold',
-    value: 0,
-  },
-  {
-    title: 'InActive',
-    value: 0,
-  },
-];
-
-const BuyerStages = ({navigation: {navigate}}) => {
+const BuyerStages = ({dashboard, loading, navigation: {navigate}}) => {
+  if (loading) {
+    return <Loading />;
+  }
   const keyExtractor = (item, index) => `${item}-${index}`;
   const renderItem = ({item}) => {
     return (
@@ -46,10 +25,24 @@ const BuyerStages = ({navigation: {navigate}}) => {
       </View>
     );
   };
-  const renderFlatList = data => {
+  const toKeyValue = obj => {
+    let arr = [];
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        arr.push({key: key, value: obj[key]});
+      }
+    }
+    return arr;
+  };
+  const renderFlatList = () => {
+    const {DEALS_COUNT} = dashboard;
+    const arrayKeyValue = toKeyValue(DEALS_COUNT);
+    arrayKeyValue.sort((a, b) => {
+      return a.key.localeCompare(b.key);
+    });
     return (
       <FlatList
-        data={data}
+        data={arrayKeyValue}
         numColumns={2}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
@@ -76,10 +69,19 @@ const BuyerStages = ({navigation: {navigate}}) => {
   };
   return (
     <View style={{flex: 1}}>
-      {renderFlatList(listData)}
+      {renderFlatList()}
       {renderButton()}
     </View>
   );
 };
 
-export default memo(BuyerStages);
+const mapStateToProps = state => ({
+  loading: !!state.loading[`${types.DASHBOARD}`],
+  error: state.error[`${types.DASHBOARD}`],
+  dashboard: state.dashboard,
+});
+
+export default connect(
+  mapStateToProps,
+  null,
+)(memo(BuyerStages));

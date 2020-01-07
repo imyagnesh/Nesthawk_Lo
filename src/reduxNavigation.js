@@ -30,8 +30,10 @@ class ReduxNavigation extends PureComponent {
     // $FlowFixMe
     const {dispatch, state} = this.props;
     if (
+      state.routes &&
       state.routes[state.index] &&
-      state.routes[state.index].routes.length === 1
+      state.routes[state.index].routes &&
+      state.routes[state.index].routes.length === 4
     ) {
       Alert.alert(
         'Exit Application',

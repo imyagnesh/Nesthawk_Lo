@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   mar10: {
     margin: 10,
   },
-  bgColor: {backgroundColor: '#fff'},
+  // bgColor: {backgroundColor: '#fff'},
 });
 
 export default styles;

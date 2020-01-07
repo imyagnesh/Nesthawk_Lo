@@ -1,3 +1,17 @@
 export const REQUEST = 'REQUEST';
 export const SUCCESS = 'SUCCESS';
 export const FAIL = 'FAIL';
+export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
+export const DASHBOARD = 'DASHBOARD';
+export const DEALS = 'DEALS';
+export const DEAL_DETAIL = 'DEAL_DETAIL';
+export const DEAL_DETAIL_POST = 'DEAL_DETAIL_POST';
+export const DEAL_FILES = 'DEAL_FILES';
+export const DEAL_FILES_POST = 'DEAL_FILES_POST';
+export const USER_INFO = 'USER_INFO';
+export const REFER_AGENT_GET_LENDER_INFO = 'REFER_AGENT_GET_LENDER_INFO';
+export const REFER_AGENT = 'REFER_AGENT';
+export const CHAT_MSG = 'CHAT_MSG';
+export const CHAT_MSG_POST = 'CHAT_MSG_POST';
+export const LOGIN_CHAT_MSG = 'LOGIN_CHAT_MSG';

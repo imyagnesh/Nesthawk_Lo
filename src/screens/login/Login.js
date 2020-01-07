@@ -5,11 +5,10 @@ import SafeAreaView from 'react-native-safe-area-view';
 import {connect} from 'react-redux';
 import Form from '../../components/form/Form';
 import fields from './fields';
-import {Api, action} from '../../utils';
-import {AUTH, SUCCESS} from '../../constants/actionTypes';
-import navigation from '../../navigation';
+import {action} from '../../utils';
+import * as types from '../../constants/actionTypes';
 
-const Login = ({authSuccess}) => {
+const Login = ({loginSuccess}) => {
   const headerImage = () => {
     return (
       <Image
@@ -25,44 +24,27 @@ const Login = ({authSuccess}) => {
     );
   };
 
-  const login = async (values, actions) => {
-    try {
-      //   authSuccess({
-      //     access_token: res.data.sessionId,
-      //     instance_url: res.data.serverURL,
-      //     token_type: 'Bearer',
-      //   });
-      navigation.navigate('Dashboard');
-      actions.resetForm();
-    } catch (error) {
-      actions.setStatus({serverError: error.message});
-    } finally {
-      actions.setSubmitting(false);
-    }
-  };
-
   return (
     <SafeAreaView
       style={{flex: 1, justifyContent: 'center'}}
       forceInset={{top: 'never', bottom: 'always'}}>
-      <View style={{flex: 1, marginTop: 100}}>
-        <View style={{flexDirection: 'row'}}>{headerImage()}</View>
-        <Form
-          initialValues={{
-            username: '',
-            password: '',
-          }}
-          fields={fields}
-          onSubmit={login}
-        />
-      </View>
+      <View style={{flexDirection: 'row'}}>{headerImage()}</View>
+      <Form
+        initialValues={{
+          username: '',
+          password: '',
+        }}
+        fields={fields}
+        onSubmit={loginSuccess}
+      />
     </SafeAreaView>
   );
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    authSuccess: payload => dispatch(action(`${AUTH}_${SUCCESS}`, payload)),
+    loginSuccess: (values, actions) =>
+      dispatch(action(`${types.LOGIN}_${types.REQUEST}`, values, actions)),
   };
 };
 

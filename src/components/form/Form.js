@@ -17,12 +17,12 @@ const Form = ({
 }) => {
   return (
     <Formik ref={innerRef} {...props}>
-      {({handleSubmit, isSubmitting, status, values}) => {
+      {({handleSubmit, isSubmitting, errors, values}) => {
         return (
           <>
-            {status && status.serverError && (
+            {errors && errors.serverError && (
               <Text variant="error" style={{textAlign: 'center', margin: 10}}>
-                {status.serverError}
+                {errors.serverError}
               </Text>
             )}
             <KeyboardAvoidingView

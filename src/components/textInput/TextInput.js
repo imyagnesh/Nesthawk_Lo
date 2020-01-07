@@ -13,6 +13,7 @@ const index = ({
   label,
   editable,
   disable,
+  isRequired,
   ...props
 }) => {
   const error = getIn(errors, name);
@@ -20,7 +21,12 @@ const index = ({
   const errorMsg = touch && error ? error : null;
   return (
     <View>
-      {label && <Text variant="label">{label}</Text>}
+      {label && (
+        <Text variant="label">
+          {label}
+          {!!isRequired && <Text variant="error"> * </Text>}
+        </Text>
+      )}
       <TextInput
         {...props}
         ref={innerRef}

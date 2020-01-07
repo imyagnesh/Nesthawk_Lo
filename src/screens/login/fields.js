@@ -1,4 +1,7 @@
+import React from 'react';
 import TextInput from '../../components/textInput/TextInput';
+
+export const passwordRef = React.createRef();
 
 export default [
   {
@@ -10,6 +13,11 @@ export default [
       height: 40,
     },
     returnKeyType: 'next',
+    onSubmitEditing: () => {
+      if (passwordRef && passwordRef.current) {
+        passwordRef.current.focus();
+      }
+    },
     value: '',
     validate: value => {
       let errorMessage;
@@ -29,6 +37,7 @@ export default [
       height: 40,
     },
     returnKeyType: 'next',
+    innerRef: passwordRef,
     value: '',
     validate: value => {
       let errorMessage;

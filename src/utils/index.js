@@ -112,3 +112,87 @@ export const openLink = url => {
       Alert.alert('Error', 'Unable to open Url');
     });
 };
+
+export const formatData = value => {
+  return value === undefined ||
+    value === '' ||
+    value === null ||
+    value.length === 0
+    ? ' '
+    : value;
+};
+
+export const formatNumberWithComma = value => {
+  return value === undefined ||
+    value === '' ||
+    value === null ||
+    value.length === 0
+    ? ' '
+    : `$${value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}`;
+};
+
+export const desiredMoveDateData = [
+  {
+    text: '1 to 30 Days',
+    value: '1 to 30 Days',
+  },
+  {
+    text: '30 to 60 Days',
+    value: '30 to 60 Days',
+  },
+];
+export const loanTypeData = [
+  {
+    text: 'FHA',
+    value: 'FHA',
+  },
+  {
+    text: 'CONV',
+    value: 'CONV',
+  },
+  {
+    text: 'VA',
+    value: 'VA',
+  },
+];
+export const preApprovedData = [
+  {
+    text: 'Yes',
+    value: 'Yes',
+  },
+  {
+    text: 'No',
+    value: 'No',
+  },
+];
+
+export const filterByStageData = [
+  {
+    text: 'Stages',
+    value: '',
+  },
+  {
+    text: 'Actively Looking',
+    value: 'Buyer Actively Looking',
+  },
+  {
+    text: 'Closed',
+    value: 'Closed',
+  },
+  {
+    text: 'Inactive',
+    value: 'Inactive',
+  },
+  {
+    text: 'Offer Out',
+    value: 'Buyer Making Offer',
+  },
+  {
+    text: 'Under Contract',
+    value: 'UC',
+  },
+  {
+    text: 'On Hold',
+    value: 'On Hold',
+  },
+];
